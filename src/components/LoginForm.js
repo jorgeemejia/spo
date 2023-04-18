@@ -24,7 +24,7 @@ function LoginForm() {
     event.preventDefault();
     console.log("Username: ", username);
     console.log("Password: ", password);
-    axios.post('http://localhost:3001/login', {username, password})
+    axios.post('https://localhost:3001/login', {username, password})
       .then(response => {
         console.log(response.data.success)
         console.log(response.data.userPublic)
