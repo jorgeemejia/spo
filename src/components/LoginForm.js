@@ -7,6 +7,7 @@ function LoginForm() {
   const [showForm, setShowForm] = useState("");
   const [order, setOrder] = useState("");
   const [publicKey, setPublicKey] = useState("");
+  const [jwt, setJwt] = useState("");
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -26,8 +27,10 @@ function LoginForm() {
     console.log("Password: ", password);
     axios.post('https://localhost:3001/login', {username, password})
       .then(response => {
-        console.log(response.data.success)
-        console.log(response.data.userPublic)
+        console.log('Response: ', response.data.success);
+        console.log("User's Public Key: ", response.data.userPublic);
+        console.log("JWT Token: ", response.data.jwt);
+        setJwt(response.data.jwt);
         if (response.data) {
           setShowForm(true);
         }
@@ -60,6 +63,7 @@ function LoginForm() {
       ) : (
         <div>
           <h1>Welcome, {username}!</h1>
+          <h2>JWT: {jwt}</h2>
           <form onSubmit={handleSubmit2}>
             <label>
               Order:
